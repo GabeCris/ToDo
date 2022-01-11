@@ -14,15 +14,15 @@ const createCard = (task, type = "sports", description = "Nenhuma descrição", 
   card.innerHTML = `
     <div class="card-task" data-index="${index}">
         <div class="icon-card-container ${type}" data-index="${index}">
-            <img src="/img/icons/${type}.svg" alt="" class="icon-card ${type}">
+            <img src="./img/icons/${type}.svg" alt="" class="icon-card ${type}">
         </div>
         <p class="text-card" data-index="${index}">${task}</p>
-        <img src="/img/icons/confirm.svg" alt="" class="confirm-task" data-index="${index}">
+        <img src="./img/icons/confirm.svg" alt="" class="confirm-task" data-index="${index}">
     </div>
     <div class="card-description ${type}">
         <p class="description-content" data-index="${index}">${description}</p>
-        <img src="/img/icons/edit.svg" alt="" class="edit-icon" data-index="${index}">
-        <img src="/img/icons/trash.svg" alt="" class="trash-icon" data-index="${index}">
+        <img src="./img/icons/edit.svg" alt="" class="edit-icon" data-index="${index}">
+        <img src="./img/icons/trash.svg" alt="" class="trash-icon" data-index="${index}">
     </div>
                             `;
 
