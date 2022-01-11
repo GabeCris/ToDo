@@ -1,0 +1,771 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #073B4C;
+    overflow-x: hidden;
+    user-select: none;  
+}
+
+:root{
+    --red-color: #EF476F;
+    --yellow-color: #FFD166;
+    --green-color: #06D6A0;
+    --blue-color: #118AB2;
+    --dark-blue-color: #073B4C;
+    --white-color: #FEF9EF;
+    --violet-color: #C89EFE;
+    --gray-color: #A09F9A;
+    --black-color: #000000;
+}
+
+/* GLOBAL */
+
+html{
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body{
+    background-color: var(--dark-blue-color);
+    padding-bottom: 50px;
+
+}
+
+
+body::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  body::-webkit-scrollbar-track {
+    background: var(--dark-blue-color);        /* color of the tracking area */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--white-color);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+
+.button{
+    overflow-y: hidden;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    font-size: 36px;
+    transition: .4s;
+
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--dark-blue-color);
+    padding: 10px 30px;
+}
+
+.button:hover{
+    transition: .4s;
+    opacity: 70%;
+    /* transform: rotate(15deg); */
+}
+
+.buttons{
+    display: flex;
+    gap: 25px;
+}
+
+.cancel-task{
+    background-color: var(--red-color);
+}
+
+
+.cancel-task img{
+    filter: brightness(100);
+}
+
+
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+header{
+    top: 0;
+    position: fixed;
+    z-index: 2;
+    height: 120px;
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--dark-blue-color);
+}
+
+header p{
+    color: white;
+}
+
+nav{
+    display: flex;
+    gap: 30px;
+}
+
+label p{
+    color: white;
+}
+
+main{
+    margin-top: 120px;
+}
+
+/* NEW TASK */
+
+.new-task-modal,
+.edit-modal{
+    position: absolute;
+    background-color: var(--dark-blue-color);
+    width: 100%;
+    height: 100vh;
+    display: none;
+}
+
+.new-task-modal input,
+.new-task-modal textarea,
+.edit-modal input,
+.edit-modal textarea{
+    padding-left: 30px;
+    font-size: 28px;
+    outline: none;
+    border: none;
+    border-left: 20px solid var(--gray-color);
+    width: 700px;
+    border-radius: 10px;
+    transition: .4s;
+}
+
+#desc-input, #edit-desc-input{
+    max-height: 200px;
+    width: 700px;
+    padding: 20px 30px 20px 30px;
+    resize: none;
+}
+
+.new-task-modal input:focus,
+.new-task-modal textarea:focus,
+.edit-modal input:focus,
+.edit-modal textarea:focus{
+    transition: .4s;
+    border-left: 40px solid var(--gray-color);
+}
+
+.new-task-modal input[type="text"]::placeholder,
+.new-task-modal textarea::placeholder,
+.edit-modal input[type="text"]::placeholder,
+.edit-modal textarea::placeholder{
+    font-size: 28px;
+    text-align: left;
+    color: var(--gray-color);
+}
+
+#task-input, #edit-task-input{
+    margin-bottom: 10px;
+    min-height: 70px;
+}
+
+#list-tasks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.type-container{
+    display: flex;
+    gap: 30px;
+    margin-bottom: 15px;
+}
+
+
+.type-container-label{
+    overflow-y: hidden;
+    margin-top: 15px;
+    position: relative;
+    transition: .4s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75px;
+    height: 75px;
+    border-radius: 10px;
+}
+
+.bg-radio{
+    border-radius: 10px;
+    position: absolute;
+    opacity: 30%;
+    width: 75px;
+    height: 75px;
+    transition: .4s;
+}
+
+.type-container-label img{
+    transition: .4s;
+    z-index: 1;
+    opacity: 30%;
+}
+
+.type-container label:hover{
+    transition: .4s;
+    transform: translateY(-15px);
+}
+
+.type-container-label input[type="radio"]:checked ~ .bg-radio,
+.type-container-label input[type="radio"]:checked ~ img{
+    transition: .4s;
+    opacity: 100%;
+}
+
+.type-container label input[type="radio"]{
+    display: none;
+}
+
+.hide-new-modal,
+.hide-edit-modal{
+    transition: .4s;
+
+    transform: translateY(-100%);
+}
+
+.show-new-modal,
+.show-edit-modal{
+    transition: .4s;
+    transform: translateY(0);
+}
+
+/* FILTER MODAL */
+.filter-modal,
+.new-task-modal,
+.edit-modal{
+    z-index: 10;
+    position: fixed;
+    background-color: var(--dark-blue-color);
+    padding: 30px 160px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    /* transform: translateY(-100%); */
+    /* display: none; */
+}
+
+.filter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.filter-icon{
+    border-bottom: 8px solid var(--black-color);
+}
+
+.hide-filter-modal{
+    transition: .4s;
+
+    transform: translateY(-100%);
+}
+
+.show-filter-modal{
+    transition: .4s;
+    transform: translateY(0);
+}
+
+.filter-container{
+    height: 180px;
+    margin: 15px;
+    display: flex;
+    gap: 20px 45px;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.bottom{
+    margin-bottom: 30px;
+}
+
+.title-modal{
+    overflow-y: hidden;
+    color: var(--white-color);
+    font-size: 96px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.card-filter-type{
+    transition: .4s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    width: 180px;
+    z-index: 20;
+    height: 145px;
+}
+
+.card-filter-type:hover{
+    transition: .4s;
+    transform: translateY(-15px);
+}
+
+.card-filter-type input[type="radio"]{
+    display: none;
+}
+
+.card-filter-type input[type="radio"]:checked ~ .img-filter{
+    transition: .4s;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.name-filter-type{
+    overflow-y: hidden;
+    color: var(--dark-blue-color);
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.img-filter{
+    transition: .4s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    border-radius: 10px;
+}
+
+.img-filter-type{
+    width: 30px;
+}
+
+.sports-filter{
+    border-bottom: 8px solid var(--red-color);
+
+}
+
+.food-filter{
+    border-bottom: 8px solid var(--yellow-color);
+
+}
+
+.studies-filter{
+    border-bottom: 8px solid var(--green-color);
+}
+
+.work-filter{
+    border-bottom: 8px solid var(--blue-color);
+}
+
+.family-filter{
+    border-bottom: 8px solid var(--violet-color);
+
+}
+
+.home-filter{
+    border-bottom: 8px solid var(--gray-color);
+
+}
+
+.all-filter{ 
+    border-bottom: 8px solid var(--black-color);       
+}
+
+/* INFORMATION MODAL */
+
+/* MAIN CONTAINER */
+
+header > a  img{
+    width: 270px;
+}
+
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding-top: 30px; */
+}
+
+.text-null{
+    margin-top: 20px;
+    position: absolute;
+    color: white;
+    font-size: 32px;
+    text-transform: uppercase;
+    opacity: 50%;
+    z-index: -1;
+}
+
+.card input[type="checkbox"]{
+    display: none;
+}
+
+.card input[type="checkbox"]:checked ~ p{
+    text-decoration: line-through;
+}
+
+.card-task{
+ display: flex;
+ width: 100%;
+ align-items: center;
+ justify-content: space-between;
+ height: 120px;
+}
+
+.card{
+    margin-top: 20px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 900px;
+    z-index: 1;
+    transition: .3s;
+    background-color: var(--white-color);
+    /* border-bottom: 10px solid var(--red-color); */
+}
+
+.remove-card{
+    transform: translateY(-100vh);
+    transition: .4s;
+    opacity: 10%;
+}
+
+.icon-card-container{
+    position: absolute;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 120px;
+    background-color: var(--red-color);
+    border-radius: 10px 0 0 0;
+}
+
+.icon-card{
+    width: 45px;
+    height: 45px;
+}
+
+.confirm-task{ 
+    transition: .3s;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    opacity: 70%;
+    margin-right: 25px;
+    z-index: 3;
+}
+
+.confirm-task:hover{
+    opacity: 1;
+}
+.hide-card{
+    display: none;
+}
+
+
+.completed-task{
+    opacity: 50%;
+    text-decoration: line-through;
+}
+
+.not-completed{
+    opacity: 100%;
+}
+
+.text-card{
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-left: 95px;
+    font-size: 40px;
+}
+
+.description-content{
+    margin-left: 95px;
+    width: 700px;
+    font-size: 24px;
+    color: var(--white-color);
+    line-height: 35px;
+    word-wrap: break-word;
+}
+
+.card-description{
+    display: flex;
+    align-items: center;
+    height: 0;
+    overflow-y: hidden;
+    transition: .4s;
+    position: relative;
+}
+
+
+.active{
+    height: 150px;
+}
+
+.trash-icon,
+.edit-icon{
+    width: 30px;
+    height: 34px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 30px 40px;
+}
+
+.edit-icon{
+    margin-bottom: 90px;
+}
+
+.sports{
+    background-color: var(--red-color);
+}
+
+.food{
+    background-color: var(--yellow-color);
+}
+
+.studies{
+    background-color: var(--green-color);
+}
+
+.work{
+    background-color: var(--blue-color);
+}
+
+.family{
+    background-color: var(--violet-color);
+}
+
+.home{
+    background-color: var(--gray-color);
+}
+
+.all{
+    background-color: var(--black-color);
+}
+
+@media only screen and (max-width: 950.98px){
+
+    header a > img{
+        width: 124px;
+        height: 31px;
+    }
+
+    .button{
+        padding: 5px 15px;
+        font-size: 19px;
+    }
+
+    header{
+        height: 80px;
+    }
+
+    .filter-icon img{
+        width: 45px;
+    }
+
+    #contador{
+        display: none;
+    }
+
+    nav{
+        gap: 15px;
+    }
+
+    main{
+        margin-top: 75px;
+    }
+
+    /* CARD */
+
+    .card{
+        width: 80%;
+        height: 250px;
+    }
+
+    .icon-card-container{
+        width: 40px;
+        height: 80px;
+    }
+
+    .icon-card-container img{
+        width: 25px;
+    }
+
+    .text-card{
+        margin-left: 50px;
+        font-size: 20px;
+        overflow-y: hidden;
+        width: 60%;
+        line-height: 25px;
+    }
+
+    .confirm-task{
+        width: 40px;
+    }
+
+    .card-task{
+        height: 80px;
+    }
+
+    .active{
+        height: 100%;
+    }
+
+    .card-description{
+        height: 190px;
+    }
+    
+    .description-content{
+        display: flex;
+        align-items: center;
+        width: 70%;
+        font-size: 18px;
+        line-height: 20px;
+        margin-left: 10px;
+        height: 90%;
+    }
+
+    .trash-icon,
+    .edit-icon{
+        width: 30px;
+        height: 30px;
+        margin: 20px 20px;
+    }
+
+    .edit-icon{
+        margin-bottom: 120px;
+    }
+
+    /* NEW TASK */
+
+    #desc-input, #edit-desc-input{
+        max-height: 290px;
+        width: 290px;
+        padding: 10px 15px;
+        resize: none;
+    }
+
+
+    .new-task-modal input,
+.new-task-modal textarea,
+.edit-modal input,
+.edit-modal textarea{
+    padding-left: 10px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-left: 20px solid var(--gray-color);
+    width: 290px;
+    border-radius: 10px;
+    transition: .4s;
+}
+
+    .new-task-modal input[type="text"]::placeholder,
+.new-task-modal textarea::placeholder,
+.edit-modal input[type="text"]::placeholder,
+.edit-modal textarea::placeholder{
+    font-size: 20px;
+    text-align: left;
+    color: var(--gray-color);
+}
+
+.type-container-label img{
+    width: 25px;
+}
+.type-container-label{
+    width: 45px;
+    height: 45px;
+}
+
+.type-container{
+    gap: 10px;
+    overflow-y: hidden;
+}
+
+.buttons{
+    margin-bottom: 50px;
+}
+
+.confirm-task{
+    margin-right: 15px;
+}
+
+    .title-modal{
+        text-align: center;
+        width: 300px;
+        font-size: 35px;
+    }
+
+    .card-filter-type{
+        width: 115px;
+        height: 100px;
+    }
+
+    .name-filter-type{
+        font-size: 20px;
+    }
+
+    .img-filter{
+        width: 45px;
+        height: 45px;
+    }
+
+    .filter-modal .button{
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+
+    .filter-container{
+        overflow-y: hidden;
+        gap: 10px 10px;
+        width: 100vw;
+        height: 230px;
+        margin: 5px 0;
+        flex-wrap: wrap;
+        /* padding: 10px 0px; */
+    }
+
+    .card-filter-type:hover{
+    transform: translateY(-8px);
+    }
+
+
+}
