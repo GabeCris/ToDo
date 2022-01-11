@@ -1,248 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TO-DO 2</title>
-    <link rel="stylesheet" href="style/style.css">
-</head>
-<body onload="initialize()">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon" />
+    <title>ToDo - List</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body onload="initialize()">
     <section id="new-task-modal" class="new-task-modal hide-new-modal">
+      <h1 class="title-modal">Nova tarefa</h1>
 
-        <h1 class="title-modal">
-            Nova tarefa
-        </h1>
+      <input
+        type="text"
+        id="task-input"
+        class="task-input"
+        placeholder="Informe a nova tarefa"
+        maxlength="20"
+        onkeydown="inputWrite()"
+        required
+      />
+      <textarea
+        id="desc-input"
+        class="desc-input"
+        placeholder="Descrição da Tarefa"
+        maxlength="120"
+      ></textarea>
 
-         
-        <input type="text" id="task-input" class="task-input" placeholder="Informe a nova tarefa"  maxlength="20" onkeydown="inputWrite()" required>
-        <textarea id="desc-input" class="desc-input" placeholder="Descrição da Tarefa" maxlength="120"></textarea>
+      <div class="type-container">
+        <label class="type-container-label">
+          <input
+            id="filter-sports"
+            type="radio"
+            name="type-filter"
+            value="sports"
+            checked
+          />
+          <img src="./img/icons/sports.svg" alt="sports" />
+          <div class="sports bg-radio"></div>
+        </label>
 
-        <div class="type-container">
+        <label class="type-container-label">
+          <input type="radio" name="type-filter" value="food" />
+          <img src="./img/icons/food.svg" alt="food" />
+          <div class="food bg-radio"></div>
+        </label>
 
-            <label class="type-container-label">
-                <input id="filter-sports" type="radio" name="type-filter" value="sports" checked> 
-                <img src="./img/icons/sports.svg" alt="sports">
-                <div class="sports bg-radio"></div>
-            </label>
-    
-            <label class="type-container-label">
-                <input type="radio" name="type-filter" value="food"> 
-                <img src="./img/icons/food.svg" alt="food">
-                <div class="food bg-radio"></div>
-            </label>
-    
-            <label class="type-container-label">
-                <input type="radio" name="type-filter" value="studies"> 
-                <img src="./img/icons/studies.svg" alt="study">
-                <div class="studies bg-radio"></div>
-            </label>
-            
-            <label class="type-container-label">
-                <input type="radio" name="type-filter" value="work"> 
-                <img src="./img/icons/work.svg" alt="work">
-                <div class="work bg-radio"></div>
-            </label>
-            
-            <label  class="type-container-label">
-                <input type="radio" name="type-filter" value="home"> 
-                <img src="./img/icons/home.svg" alt="home">
-                <div class="home bg-radio"></div>
-            </label>
-    
-            <label  class="type-container-label">
-                <input type="radio" name="type-filter" value="family"> 
-                <img src="./img/icons/family.svg" alt="family">
-                <div class="family bg-radio"></div>
-            </label>
-        </div>
+        <label class="type-container-label">
+          <input type="radio" name="type-filter" value="studies" />
+          <img src="./img/icons/studies.svg" alt="study" />
+          <div class="studies bg-radio"></div>
+        </label>
 
+        <label class="type-container-label">
+          <input type="radio" name="type-filter" value="work" />
+          <img src="./img/icons/work.svg" alt="work" />
+          <div class="work bg-radio"></div>
+        </label>
 
-        <div class="buttons">
-            <button id="create-task" onclick="createNewTask()" class="button">Criar</button>
-            <button id="cancel-task" onclick="closeNewTask()" class="button cancel-task"><img src="./img/icons/cancel.svg" alt=""></button>
-        </div>
-        
+        <label class="type-container-label">
+          <input type="radio" name="type-filter" value="home" />
+          <img src="./img/icons/home.svg" alt="home" />
+          <div class="home bg-radio"></div>
+        </label>
+
+        <label class="type-container-label">
+          <input type="radio" name="type-filter" value="family" />
+          <img src="./img/icons/family.svg" alt="family" />
+          <div class="family bg-radio"></div>
+        </label>
+      </div>
+
+      <div class="buttons">
+        <button id="create-task" onclick="createNewTask()" class="button">
+          Criar
+        </button>
+        <button
+          id="cancel-task"
+          onclick="closeNewTask()"
+          class="button cancel-task"
+        >
+          <img src="./img/icons/cancel.svg" alt="" />
+        </button>
+      </div>
     </section>
 
     <section id="edit-modal" class="edit-modal hide-edit-modal">
+      <h1 class="title-modal">EDITAR TAREFA</h1>
 
-        <h1 class="title-modal">
-            EDITAR TAREFA
-        </h1>
+      <input
+        type="text"
+        id="edit-task-input"
+        class="task-input"
+        placeholder="Informe a nova tarefa editada"
+        onkeydown="inputWrite()"
+        maxlength="20"
+        required
+      />
+      <textarea
+        id="edit-desc-input"
+        class="desc-input"
+        placeholder="Descrição da Tarefa editada"
+        maxlength="120"
+      ></textarea>
 
-         
-        <input type="text" id="edit-task-input" class="task-input" placeholder="Informe a nova tarefa editada" onkeydown="inputWrite()" maxlength="20" required>
-        <textarea id="edit-desc-input" class="desc-input" placeholder="Descrição da Tarefa editada" maxlength="120"></textarea>
-
-        <div class="type-container">
-
-            <label class="type-container-label">
-                <input id="filter-sports" type="radio" name="type-filter-edit" value="sports"> 
-                <img src="./img/icons/sports.svg" alt="sports">
-                <div class="sports bg-radio"></div>
-            </label>
-    
-            <label class="type-container-label">
-                <input type="radio" name="type-filter-edit" value="food"> 
-                <img src="./img/icons/food.svg" alt="food">
-                <div class="food bg-radio"></div>
-            </label>
-    
-            <label class="type-container-label">
-                <input type="radio" name="type-filter-edit" value="studies"> 
-                <img src="./img/icons/studies.svg" alt="study">
-                <div class="studies bg-radio"></div>
-            </label>
-            
-            <label class="type-container-label">
-                <input type="radio" name="type-filter-edit" value="work"> 
-                <img src="./img/icons/work.svg" alt="work">
-                <div class="work bg-radio"></div>
-            </label>
-            
-            <label  class="type-container-label">
-                <input type="radio" name="type-filter-edit" value="home"> 
-                <img src="./img/icons/home.svg" alt="home">
-                <div class="home bg-radio"></div>
-            </label>
-    
-            <label  class="type-container-label">
-                <input type="radio" name="type-filter-edit" value="family"> 
-                <img src="./img/icons/family.svg" alt="family">
-                <div class="family bg-radio"></div>
-            </label>
-        </div>
-
-
-        <div class="buttons">
-            <button onclick="inputEdits()" class="button">Editar</button>
-            <button onclick="closeEditModal()" class="button cancel-task"><img src="./img/icons/cancel.svg" alt=""></button>
-        </div>
-
-        <!-- <button id="create-task" onclick="inputEdits()" class="button">Criar</button> -->
-        
+      <div class="type-container">
+        <!-- SPORTS -->
+        <label class="type-container-label">
+          <input
+            id="filter-sports"
+            type="radio"
+            name="type-filter-edit"
+            value="sports"
+          />
+          <img src="./img/icons/sports.svg" alt="sports" />
+          <div class="sports bg-radio"></div>
+        </label>
+        <!-- FOOD -->
+        <label class="type-container-label">
+          <input type="radio" name="type-filter-edit" value="food" />
+          <img src="./img/icons/food.svg" alt="food" />
+          <div class="food bg-radio"></div>
+        </label>
+        <!-- STUDY -->
+        <label class="type-container-label">
+          <input type="radio" name="type-filter-edit" value="studies" />
+          <img src="./img/icons/studies.svg" alt="study" />
+          <div class="studies bg-radio"></div>
+        </label>
+        <!-- WORK -->
+        <label class="type-container-label">
+          <input type="radio" name="type-filter-edit" value="work" />
+          <img src="./img/icons/work.svg" alt="work" />
+          <div class="work bg-radio"></div>
+        </label>
+        <!-- HOME -->
+        <label class="type-container-label">
+          <input type="radio" name="type-filter-edit" value="home" />
+          <img src="./img/icons/home.svg" alt="home" />
+          <div class="home bg-radio"></div>
+        </label>
+        <!-- FAMILY -->
+        <label class="type-container-label">
+          <input type="radio" name="type-filter-edit" value="family" />
+          <img src="./img/icons/family.svg" alt="family" />
+          <div class="family bg-radio"></div>
+        </label>
+      </div>
+      <div class="buttons">
+        <button onclick="inputEdits()" class="button">Editar</button>
+        <button onclick="closeEditModal()" class="button cancel-task">
+          <img src="./img/icons/cancel.svg" alt="" />
+        </button>
+      </div>
     </section>
-
     <section id="filter-modal" class="filter-modal hide-filter-modal">
-        <h1 class="title-modal">Filtros
-        </h1>
-        <div class="filter">
+      <h1 class="title-modal">Filtros</h1>
+      <div class="filter">
+        <div class="filter-container top">
+          <!-- SPORTS -->
+          <label class="card-filter-type sports-filter">
+            <input
+              class="input-filter"
+              type="radio"
+              value="sports"
+              name="type"
+            />
+            <div class="img-filter sports">
+              <img
+                src="./img/icons/sports.svg"
+                alt=""
+                class="img-filter-type"
+              />
+            </div>
+            <p class="name-filter-type">Esportes</p>
+          </label>
 
-            <div class="filter-container top">
-                <!-- SPORTS -->
-                    <label class="card-filter-type sports-filter"> 
-                        <input class="input-filter" type="radio" value="sports" name="type">
-                        <div class="img-filter sports">
-                            <img src="./img/icons/sports.svg" alt="" class="img-filter-type">
-                        </div>
-                        <p class="name-filter-type">Esportes</p>
-                    </label>
-        
-                <!-- FOOD -->
-                    <label class="card-filter-type food-filter"> 
-                        <input class="input-filter" type="radio" value="food" name="type">
-                        <div class="img-filter food">
-                            <img src="./img/icons/food.svg" alt="" class="img-filter-type">
-                        </div>
-                        <p class="name-filter-type">Comida</p>
-                    </label>
-                    
-                    <!-- STUDY -->
-                    <label class="card-filter-type studies-filter"> 
-                        <input class="input-filter" type="radio" value="studies" name="type">
-                        <div class="img-filter studies">
-                            <img src="./img/icons/studies.svg" alt="" class="img-filter-type">
-                        </div>
-                        <p class="name-filter-type">Estudos</p>
-                    </label>
-        
-                      <!-- WORK -->
-                      <label class="card-filter-type work-filter"> 
-                        <input class="input-filter" type="radio" value="work" name="type">
-                        <div class="img-filter work">
-                            <img src="./img/icons/work.svg" alt="" class="img-filter-type">
-                        </div>
-                        <p class="name-filter-type">Trabalho</p>
-                    </label>
-        
-                </div>
-                <div class="filter-container bottom">
-                      <!-- FAMILIA -->
-                      <label class="card-filter-type family-filter"> 
-                        <input class="input-filter" type="radio" value="family" name="type">
-                        <div class="img-filter family">
-                            <img src="./img/icons/family.svg" alt="" class="img-filter-type">
-                        </div>
-                        <p class="name-filter-type">Família</p>
-                    </label>
-                    
-                      <!-- CASA -->
-                      <label class="card-filter-type home-filter"> 
-                        <input class="input-filter" type="radio" value="home" name="type">
-                        <div class="img-filter home">
-                            <img src="./img/icons/home.svg" alt="" class="img-filter-type">
-                        </div>
-                        <p class="name-filter-type">Casa</p>
-                    </label>
-        
-                    <!-- TUDO -->
-                    <label class="card-filter-type all-filter"> 
-                        <input class="input-filter" type="radio" value="all" name="type" checked>
-                        <div class="img-filter all">
-                            <img src="./img/icons/all.svg" alt="" class="img-filter-type">
-                        </div>
-                        <p class="name-filter-type">Tudo</p>
-                    </label>
-                </div>
+          <!-- FOOD -->
+          <label class="card-filter-type food-filter">
+            <input class="input-filter" type="radio" value="food" name="type" />
+            <div class="img-filter food">
+              <img src="./img/icons/food.svg" alt="" class="img-filter-type" />
+            </div>
+            <p class="name-filter-type">Comida</p>
+          </label>
+
+          <!-- STUDY -->
+          <label class="card-filter-type studies-filter">
+            <input
+              class="input-filter"
+              type="radio"
+              value="studies"
+              name="type"
+            />
+            <div class="img-filter studies">
+              <img
+                src="./img/icons/studies.svg"
+                alt=""
+                class="img-filter-type"
+              />
+            </div>
+            <p class="name-filter-type">Estudos</p>
+          </label>
+
+          <!-- WORK -->
+          <label class="card-filter-type work-filter">
+            <input class="input-filter" type="radio" value="work" name="type" />
+            <div class="img-filter work">
+              <img src="./img/icons/work.svg" alt="" class="img-filter-type" />
+            </div>
+            <p class="name-filter-type">Trabalho</p>
+          </label>
         </div>
-     <button class="button" onclick="filterType(), closeFilter()">Aplicar</button>
-        
-    </section>
+        <div class="filter-container bottom">
+          <!-- FAMILIA -->
+          <label class="card-filter-type family-filter">
+            <input
+              class="input-filter"
+              type="radio"
+              value="family"
+              name="type"
+            />
+            <div class="img-filter family">
+              <img
+                src="./img/icons/family.svg"
+                alt=""
+                class="img-filter-type"
+              />
+            </div>
+            <p class="name-filter-type">Família</p>
+          </label>
 
+          <!-- CASA -->
+          <label class="card-filter-type home-filter">
+            <input class="input-filter" type="radio" value="home" name="type" />
+            <div class="img-filter home">
+              <img src="./img/icons/home.svg" alt="" class="img-filter-type" />
+            </div>
+            <p class="name-filter-type">Casa</p>
+          </label>
+
+          <!-- TUDO -->
+          <label class="card-filter-type all-filter">
+            <input
+              class="input-filter"
+              type="radio"
+              value="all"
+              name="type"
+              checked
+            />
+            <div class="img-filter all">
+              <img src="./img/icons/all.svg" alt="" class="img-filter-type" />
+            </div>
+            <p class="name-filter-type">Tudo</p>
+          </label>
+        </div>
+      </div>
+      <button class="button" onclick="filterType(), closeFilter()">
+        Aplicar
+      </button>
+    </section>
     <section class="container">
-        <a name="top"></a>
-        <header>
-            <a href="#top">
-                <img src="./img/logo/logo.svg" alt="logo to-do">
-
-            </a>
-            <p id="contador">[0]</p>
-            <nav>
-                <button class="button" onclick="openNewTask()">Novo</button>
-                <button class="button filter-icon" id="filter-icon" onclick="openFilter()"><img src="./img/icons/filter.svg" alt="filter"></button>
-            </nav>
-        </header>
-
-        <main>
-            <!-- <p class="text-null">Nada para mostrar</p> -->
-            <ul id="list-tasks">
-                <!-- <div class="card">
-                    <div class="card-task">
-                        <div class="icon-card-container">
-                            <img src="/img/icons/sports.svg" alt="" class="icon-card">
-                        </div>
-                        <p class="text-card">
-                            FNSANNSALA
-                        </p>
-                        <img src="/img/icons/confirm.svg" alt="" class="confirm-task">
-                    </div>
-                    <div class="card-description">
-                        <p class="description-content">
-                            fskonsdlnflsdnfkjsd
-                        </p>
-                        <img src="/img/icons/trash.svg" alt="" class="trash-icon">
-                    </div>
-                </div> -->
-            </ul>
-
-
-            
-        </main>
+      <a name="top"></a>
+      <header>
+        <a href="#top">
+          <img src="./img/logo/logo.svg" alt="logo to-do" />
+        </a>
+        <p id="contador">[0]</p>
+        <nav>
+          <button class="button" onclick="openNewTask()">Novo</button>
+          <button
+            class="button filter-icon"
+            id="filter-icon"
+            onclick="openFilter()"
+          >
+            <img src="./img/icons/filter.svg" alt="filter" />
+          </button>
+        </nav>
+      </header>
+      <main>
+        <ul id="list-tasks"></ul>
+      </main>
+      <footer class="footer">
+        <nav class="footer-navigation">
+          <a
+            href="https://www.linkedin.com/in/gabriel-crisanto/"
+            target="_blank"
+          >
+            <img
+              src="./img/icons/linkedin.svg"
+              alt="ir para linkedin"
+              loading="lazy"
+            />
+          </a>
+          <a href="https://github.com/GabeCris" target="_blank">
+            <img
+              src="./img/icons/github.svg"
+              alt="ir para github"
+              loading="lazy"
+            />
+          </a>
+        </nav>
+        <p class="copyright">&copy GabeCris</p>
+        <a href="#top">
+          <img
+            id="back"
+            src="./img/icons/back.svg"
+            alt="voltar ao topo"
+            loading="lazy"
+          />
+        </a>
+      </footer>
     </section>
-    
+
     <script src="script.js"></script>
     <script src="initialize.js"></script>
-
-</body>
+  </body>
 </html>

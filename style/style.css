@@ -33,22 +33,21 @@ html{
 
 body{
     background-color: var(--dark-blue-color);
-    padding-bottom: 50px;
-
 }
 
 
 body::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 12px;
   }
-  body::-webkit-scrollbar-track {
-    background: var(--dark-blue-color);        /* color of the tracking area */
-  }
+
+body::-webkit-scrollbar-track {
+    background: var(--dark-blue-color);       
+}
   
-  body::-webkit-scrollbar-thumb {
-    background-color: var(--white-color);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-  }
+body::-webkit-scrollbar-thumb {
+    background-color: var(--white-color);    
+    border-radius: 20px;       
+}
 
 .button{
     overflow-y: hidden;
@@ -62,7 +61,6 @@ body::-webkit-scrollbar {
     border: none;
     font-size: 36px;
     transition: .4s;
-
     font-weight: bold;
     text-transform: uppercase;
     color: var(--dark-blue-color);
@@ -72,7 +70,6 @@ body::-webkit-scrollbar {
 .button:hover{
     transition: .4s;
     opacity: 70%;
-    /* transform: rotate(15deg); */
 }
 
 .buttons{
@@ -88,8 +85,6 @@ body::-webkit-scrollbar {
 .cancel-task img{
     filter: brightness(100);
 }
-
-
 
 .container{
     width: 100%;
@@ -191,13 +186,11 @@ main{
     flex-direction: column;
 }
 
-
 .type-container{
     display: flex;
     gap: 30px;
     margin-bottom: 15px;
 }
-
 
 .type-container-label{
     overflow-y: hidden;
@@ -247,7 +240,6 @@ main{
 .hide-new-modal,
 .hide-edit-modal{
     transition: .4s;
-
     transform: translateY(-100%);
 }
 
@@ -271,8 +263,6 @@ main{
     flex-direction: column;
     width: 100%;
     height: 100vh;
-    /* transform: translateY(-100%); */
-    /* display: none; */
 }
 
 .filter{
@@ -281,13 +271,13 @@ main{
     justify-content: center;
     align-items: center;
 }
+
 .filter-icon{
     border-bottom: 8px solid var(--black-color);
 }
 
 .hide-filter-modal{
     transition: .4s;
-
     transform: translateY(-100%);
 }
 
@@ -356,7 +346,6 @@ main{
 
 .img-filter{
     transition: .4s;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -371,12 +360,10 @@ main{
 
 .sports-filter{
     border-bottom: 8px solid var(--red-color);
-
 }
 
 .food-filter{
     border-bottom: 8px solid var(--yellow-color);
-
 }
 
 .studies-filter{
@@ -389,19 +376,15 @@ main{
 
 .family-filter{
     border-bottom: 8px solid var(--violet-color);
-
 }
 
 .home-filter{
     border-bottom: 8px solid var(--gray-color);
-
 }
 
 .all-filter{ 
     border-bottom: 8px solid var(--black-color);       
 }
-
-/* INFORMATION MODAL */
 
 /* MAIN CONTAINER */
 
@@ -409,12 +392,10 @@ header > a  img{
     width: 270px;
 }
 
-
 main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding-top: 30px; */
 }
 
 .text-null{
@@ -436,14 +417,15 @@ main{
 }
 
 .card-task{
- display: flex;
- width: 100%;
- align-items: center;
- justify-content: space-between;
- height: 120px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    height: 120px;
 }
 
 .card{
+    cursor: pointer;
     margin-top: 20px;
     box-sizing: border-box;
     position: relative;
@@ -454,7 +436,6 @@ main{
     z-index: 1;
     transition: .3s;
     background-color: var(--white-color);
-    /* border-bottom: 10px solid var(--red-color); */
 }
 
 .remove-card{
@@ -493,10 +474,10 @@ main{
 .confirm-task:hover{
     opacity: 1;
 }
+
 .hide-card{
     display: none;
 }
-
 
 .completed-task{
     opacity: 50%;
@@ -531,7 +512,6 @@ main{
     transition: .4s;
     position: relative;
 }
-
 
 .active{
     height: 150px;
@@ -578,6 +558,32 @@ main{
 
 .all{
     background-color: var(--black-color);
+}
+
+.footer{
+    margin-top: 30px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 15px;
+    align-items: center;
+    width: 100%;
+    background-color: var(--dark-blue-color);
+}
+  
+.footer-navigation img {
+    margin: 15px;
+}
+  
+.footer p {
+    font-weight: 200;
+    font-size: 48px;
+    color: var(--white-color);
+}
+  
+.footer img {
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 950.98px){
@@ -682,50 +688,50 @@ main{
         resize: none;
     }
 
-
     .new-task-modal input,
-.new-task-modal textarea,
-.edit-modal input,
-.edit-modal textarea{
-    padding-left: 10px;
-    font-size: 20px;
-    outline: none;
-    border: none;
-    border-left: 20px solid var(--gray-color);
-    width: 290px;
-    border-radius: 10px;
-    transition: .4s;
-}
+    .new-task-modal textarea,
+    .edit-modal input,
+    .edit-modal textarea{
+        padding-left: 10px;
+        font-size: 20px;
+        outline: none;
+        border: none;
+        border-left: 20px solid var(--gray-color);
+        width: 290px;
+        border-radius: 10px;
+        transition: .4s;
+    }
 
     .new-task-modal input[type="text"]::placeholder,
-.new-task-modal textarea::placeholder,
-.edit-modal input[type="text"]::placeholder,
-.edit-modal textarea::placeholder{
-    font-size: 20px;
-    text-align: left;
-    color: var(--gray-color);
-}
+    .new-task-modal textarea::placeholder,
+    .edit-modal input[type="text"]::placeholder,
+    .edit-modal textarea::placeholder{
+        font-size: 20px;
+        text-align: left;
+        color: var(--gray-color);
+    }
 
-.type-container-label img{
-    width: 25px;
-}
-.type-container-label{
-    width: 45px;
-    height: 45px;
-}
+    .type-container-label img{
+        width: 25px;
+    }
 
-.type-container{
-    gap: 10px;
-    overflow-y: hidden;
-}
+    .type-container-label{
+        width: 45px;
+        height: 45px;
+    }
 
-.buttons{
-    margin-bottom: 50px;
-}
+    .type-container{
+        gap: 10px;
+        overflow-y: hidden;
+    }
 
-.confirm-task{
-    margin-right: 15px;
-}
+    .buttons{
+        margin-bottom: 50px;
+    }
+
+    .confirm-task{
+        margin-right: 15px;
+    }
 
     .title-modal{
         text-align: center;
@@ -752,7 +758,6 @@ main{
         margin-bottom: 20px;
     }
 
-
     .filter-container{
         overflow-y: hidden;
         gap: 10px 10px;
@@ -760,12 +765,31 @@ main{
         height: 230px;
         margin: 5px 0;
         flex-wrap: wrap;
-        /* padding: 10px 0px; */
     }
 
     .card-filter-type:hover{
     transform: translateY(-8px);
     }
 
+    /* FOOTER*/
 
+    #back {
+        display: none;
+      }
+    
+    .footer{
+        flex-direction: column;
+    }
+    
+    .footer .footer-navigation img {
+        width: 58px;
+    }
+    
+    .footer .copyright {
+        font-size: 24px;
+    }
+    
+    .footer footer nav {
+        display: flex;
+    }
 }
