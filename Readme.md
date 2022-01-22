@@ -12,7 +12,7 @@
 Neste projeto resolvi criar uma lista de tarefas, com os conceitos de CRUD (Criar, ler, editar e deletar), utilizando o LocalStorage para armazenar os dados do usuário no navegador, com uma interface limpa e amigável de fácil utilização.
 <br>
 <br>
-
+<img src="./assets/Animação.gif">
 
 ## - Linguagens e conceitos utilizados -
 
