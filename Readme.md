@@ -3,7 +3,7 @@
 </p>
 <h2 align="center"> - ToDo List -</h2>
 <p align="center">
-<a href="https://gabecris.github.io/Todo/" target="_blank">👉 Acesse a página aqui 👈</a>
+<a href="https://gabecris.github.io/ToDo/" target="_blank">👉 Acesse a página aqui 👈</a>
 </p>
 <hr>
 
